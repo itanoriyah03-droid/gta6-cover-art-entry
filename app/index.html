@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Golden Tide Cover Studio — your photos become Vice City key art</title>
+<meta name="description" content="An offline poster studio: turn your own photos into a multi-panel GTA-style cover with striped-chrome lettering, and export it as a PNG to share. No upload, no network.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">GT</span>
+    <div>
+      <h1>Golden Tide <span>Cover Studio</span></h1>
+      <p class="tagline">Your photos become Vice City key art — offline, no upload, yours to post.</p>
+    </div>
+  </div>
+  <div class="top-actions">
+    <button id="undoBtn" type="button" title="Undo">Undo</button>
+    <button id="redoBtn" type="button" title="Redo">Redo</button>
+    <button id="exportBtn" type="button" class="primary">Export PNG</button>
+  </div>
+</header>
+
+<main class="studio">
+  <section class="preview-pane" aria-label="Live cover preview">
+    <div class="size-tabs" role="group" aria-label="Export size">
+      <button type="button" data-size="wide" class="active">Wide 1920×1080</button>
+      <button type="button" data-size="story">Story 1080×1350</button>
+      <button type="button" data-size="square">Square 1080×1080</button>
+    </div>
+    <div class="canvas-wrap">
+      <canvas id="preview" width="960" height="540"></canvas>
+      <p class="canvas-hint">Drag a panel to move its photo · Scroll over a panel to zoom · Click a panel to select it</p>
+    </div>
+    <p id="status" class="status" role="status">Pick a sample photo to start, or upload your own.</p>
+  </section>
+
+  <aside class="sidebar" aria-label="Cover controls">
+    <section class="card" aria-label="Photos">
+      <h2>1 · Photos</h2>
+      <div id="photoStrip" class="photo-strip"></div>
+      <label class="upload-btn" for="fileInput">Upload your photos…</label>
+      <input id="fileInput" type="file" accept="image/*" multiple hidden>
+      <p class="fine">Photos never leave your machine. Click a photo, then click a panel to fill it.</p>
+    </section>
+
+    <section class="card" aria-label="Panels">
+      <h2>2 · Panels</h2>
+      <div id="panelList" class="panel-list"></div>
+      <div class="panel-tools">
+        <label>Role tag <input id="roleInput" type="text" maxlength="18" value="THE DRIVER"></label>
+        <label>Photo
+          <select id="photoSelect"></select>
+        </label>
+        <label>Zoom <input id="zoomRange" type="range" min="100" max="260" value="100"></label>
+        <div class="row">
+          <button id="centerFaceBtn" type="button">Center on face</button>
+          <button id="fillBtn" type="button">Fill panel</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" aria-label="Lettering">
+      <h2>3 · Lettering</h2>
+      <label>Title <input id="titleInput" type="text" maxlength="24" value="GOLDEN TIDE"></label>
+      <label>Script subtitle <input id="subtitleInput" type="text" maxlength="32" value="one last golden summer"></label>
+      <label>Press quote <input id="quoteInput" type="text" maxlength="48" value="THE HOTTEST RIDE OF THE YEAR"></label>
+      <label>Tagline <input id="taglineInput" type="text" maxlength="64" value="SEVEN FRIENDS · ONE COAST · NO WAY BACK"></label>
+    </section>
+
+    <section class="card" aria-label="Grade">
+      <h2>4 · Grade</h2>
+      <div id="gradeRow" class="grade-row"></div>
+    </section>
+
+    <section class="card" aria-label="Layout">
+      <h2>5 · Layout</h2>
+      <div class="layout-row" role="group" aria-label="Panel layout">
+        <button type="button" data-layout="hero" class="active">Hero Grid</button>
+        <button type="button" data-layout="bleed">Full Bleed</button>
+        <button type="button" data-layout="tilted">Tilted Snapshots</button>
+      </div>
+      <button id="exportAllBtn" type="button" class="primary wide">Download all 3 sizes</button>
+      <p class="fine">Exports are PNGs: Wide 1920×1080, Story 1080×1350, Square 1080×1080.</p>
+    </section>
+
+    <section class="card about" aria-label="About">
+      <h2>About this studio</h2>
+      <p>Every cover is drawn on your machine from your photos. Sample scenes are original illustrations painted for this studio. Title font: Noto Sans Display ExtraCondensed Black; script: Noto Serif Display Black Italic — both under the SIL Open Font License (see fonts/OFL.txt). No Rockstar Games logo, artwork or font is used.</p>
+    </section>
+  </aside>
+</main>
+
+<script type="module" src="src/editor.js"></script>
+</body>
+</html>

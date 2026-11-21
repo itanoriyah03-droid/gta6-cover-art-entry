@@ -1,0 +1,202 @@
+/* Golden Tide Cover Studio — editor chrome.
+   Dark studio UI with sunset-gold accents; the poster itself is drawn on canvas
+   (see src/cover.js), so this file only dresses the tool around it. */
+
+@font-face {
+  font-family: 'StudioUI';
+  src: url('fonts/ui.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'StudioUI';
+  src: url('fonts/ui-bold.ttf') format('truetype');
+  font-weight: 700;
+  font-display: swap;
+}
+
+:root {
+  --ink: #f5efe4;
+  --ink-dim: #b9ad97;
+  --bg: #14090f;
+  --bg2: #1e0f18;
+  --card: #251220;
+  --line: #4a2b3d;
+  --gold: #f2b23e;
+  --gold-deep: #d97b29;
+  --pink: #ff4d8d;
+  --teal: #2dd4bf;
+  --radius: 12px;
+}
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; padding: 0; }
+
+body {
+  background: radial-gradient(1200px 600px at 70% -10%, #3d1428 0%, var(--bg) 55%);
+  color: var(--ink);
+  font-family: 'StudioUI', system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.45;
+  min-height: 100vh;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--line);
+  background: rgba(20, 9, 15, 0.85);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand-mark {
+  width: 44px; height: 44px;
+  display: grid; place-items: center;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--gold), var(--pink) 70%);
+  color: #1a0b12;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.04em;
+}
+.brand h1 { margin: 0; font-size: 21px; letter-spacing: 0.02em; }
+.brand h1 span { color: var(--gold); }
+.tagline { margin: 2px 0 0; color: var(--ink-dim); font-size: 13px; }
+
+.top-actions { display: flex; gap: 8px; align-items: center; }
+
+button {
+  font: inherit;
+  color: var(--ink);
+  background: var(--bg2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px 14px;
+  cursor: pointer;
+}
+button:hover { border-color: var(--gold); }
+button.primary {
+  background: linear-gradient(135deg, var(--gold), var(--gold-deep));
+  color: #1a0b12;
+  border-color: transparent;
+  font-weight: 700;
+}
+button.primary:hover { filter: brightness(1.08); }
+button.active { border-color: var(--gold); color: var(--gold); }
+button.wide { width: 100%; margin-top: 10px; }
+
+.studio {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 18px;
+  padding: 18px 20px 28px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.preview-pane { min-width: 0; }
+.size-tabs { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+.canvas-wrap {
+  background: #000;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 10px;
+}
+.canvas-wrap canvas { display: block; width: 100%; height: auto; border-radius: 6px; }
+.canvas-hint { margin: 8px 2px 0; color: var(--ink-dim); font-size: 13px; }
+.status { color: var(--gold); font-size: 13px; margin: 10px 2px 0; min-height: 1.2em; }
+
+.sidebar { display: flex; flex-direction: column; gap: 14px; }
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 14px;
+}
+.card h2 { margin: 0 0 10px; font-size: 15px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gold); }
+.card label { display: block; font-size: 13px; color: var(--ink-dim); margin: 8px 0; }
+.card input[type="text"], .card select {
+  display: block;
+  width: 100%;
+  margin-top: 4px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--bg2);
+  color: var(--ink);
+  font: inherit;
+}
+.card input[type="range"] { width: 100%; accent-color: var(--gold); }
+.fine { color: var(--ink-dim); font-size: 12px; margin: 8px 0 0; }
+.row { display: flex; gap: 8px; }
+.row button { flex: 1; }
+
+.photo-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.photo-strip figure { margin: 0; cursor: pointer; border: 2px solid transparent; border-radius: 8px; overflow: hidden; }
+.photo-strip figure.picked { border-color: var(--gold); }
+.photo-strip img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; }
+.photo-strip figcaption { font-size: 11px; text-align: center; padding: 3px 0; color: var(--ink-dim); background: var(--bg2); }
+.upload-btn {
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+  padding: 9px;
+  border: 1px dashed var(--gold);
+  border-radius: 8px;
+  color: var(--gold);
+  cursor: pointer;
+}
+
+.panel-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.panel-chip {
+  padding: 8px 6px;
+  text-align: center;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 12px;
+  background: var(--bg2);
+}
+.panel-chip small { display: block; color: var(--ink-dim); font-size: 11px; margin-top: 2px; }
+.panel-chip.selected { border-color: var(--gold); color: var(--gold); }
+
+.grade-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.grade-swatch { padding: 0; overflow: hidden; height: 44px; }
+.grade-swatch span {
+  display: block;
+  height: 100%;
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.7);
+  display: flex; align-items: flex-end;
+  padding: 4px 6px;
+}
+.layout-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.about p { font-size: 13px; color: var(--ink-dim); margin: 0; }
+
+@media (max-width: 900px) {
+  .studio { grid-template-columns: 1fr; }
+  .topbar { flex-wrap: wrap; }
+}
+
+/* Screenshot scenes: ?shot=cover draws the finished cover full frame, with the
+   editor chrome hidden, so the screenshot is the app's own drawing of the
+   cover it exports. */
+body.shot-mode { background: #000; }
+body.shot-mode .topbar,
+body.shot-mode .sidebar,
+body.shot-mode .size-tabs,
+body.shot-mode .canvas-hint,
+body.shot-mode .status { display: none; }
+body.shot-mode .studio { display: block; padding: 0; margin: 0; max-width: none; }
+body.shot-mode .preview-pane { margin: 0; }
+body.shot-mode .canvas-wrap { border: none; padding: 0; border-radius: 0; background: #000; }
+body.shot-mode .canvas-wrap canvas { width: 100vw; height: 100vh; border-radius: 0; }
